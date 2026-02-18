@@ -1,4 +1,4 @@
-Guidelines to be added when possible:
+Guidelines to be added when possible:\n
 Sort tasks by priority or status when viewing.
 Allow editing task descriptions.
 Add timestamps for creation and completion.
