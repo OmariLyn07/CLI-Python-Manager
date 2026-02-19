@@ -57,15 +57,16 @@ class TaskManager:
         return tasks
 
     def manager_start(self):
+        tasks = {}
         if os.path.exists("Tasks.txt"):
             opened_file = open("Tasks.txt")
             reader = json.load(opened_file)
-            tasks = reader
+            print(reader)
             opened_file.close()
-            for t in tasks:
-                print(t, "", tasks[t])
+            for t in reader:
+                task = Task(reader[t][0], reader[t][1])
+                tasks[t] = task
         else:
-            tasks = {}
             print(tasks)
         return tasks
     
