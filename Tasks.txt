@@ -1,14 +1,1 @@
-{
-    "0": [
-        "new task",
-        "pending"
-    ],
-    "2": [
-        "extra new task",
-        "completed"
-    ],
-    "2228": [
-        "new task",
-        "pending"
-    ]
-}
+{}

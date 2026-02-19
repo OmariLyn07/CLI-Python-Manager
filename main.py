@@ -23,13 +23,10 @@ class TaskManager:
     
     def update_task(self, tasks):
         print("Which task was completed?")
-        print(tasks)
+        self.print_curr_tasks(tasks)
         upd_task = str(input())
         if upd_task in tasks:
-            if type(tasks[upd_task]) == list:
-                tasks[upd_task][1] = "completed"
-            else:
-                tasks[upd_task].update_status()
+            tasks[upd_task].update_status()
         else:
             print("task doesnt exist")
         return tasks
@@ -37,10 +34,7 @@ class TaskManager:
     def save_file(self, tasks):
         data_to_json = {}
         for t in tasks:
-            if type(tasks[t]) == Task:
-                data_to_json[t] = [tasks[t].description, tasks[t].status]
-            else:
-                data_to_json[t] = tasks[t]
+            data_to_json[t] = [tasks[t].description, tasks[t].status]
 
         with open("Tasks.txt", "w") as file:
             file.write(json.dumps(data_to_json, indent=4))
@@ -60,12 +54,16 @@ class TaskManager:
         tasks = {}
         if os.path.exists("Tasks.txt"):
             opened_file = open("Tasks.txt")
-            reader = json.load(opened_file)
-            print(reader)
-            opened_file.close()
-            for t in reader:
-                task = Task(reader[t][0], reader[t][1])
-                tasks[t] = task
+            try:
+                reader = json.load(opened_file)
+                print(reader)
+                opened_file.close()
+                for t in reader:
+                    task = Task(reader[t][0], reader[t][1])
+                    tasks[t] = task
+            except Exception as e:
+                print(tasks)
+
         else:
             print(tasks)
         return tasks
@@ -80,10 +78,7 @@ class TaskManager:
         
     def print_curr_tasks(self, tasks):
         for t in tasks:
-            if type(tasks[t]) == Task:
-                print(t, "", [tasks[t].description, tasks[t].status])
-            else:
-                print(t, "", tasks[t])
+            print(t, "", [tasks[t].description, tasks[t].status])
 
 
 def main():
